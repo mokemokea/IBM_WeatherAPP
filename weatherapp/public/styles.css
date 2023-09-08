@@ -1,0 +1,57 @@
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e6f7ff;  /* Šù‘¶‚Ì”wŒiF */
+  background-image: url('/images/26.png');  /* ’Ç‰Á‚·‚é”wŒi‰æ‘œ */
+  background-repeat: repeat;  /* ‰æ‘œ‚ğŒJ‚è•Ô‚· */
+  background-size: 1200px 300px;  /* ŒJ‚è•Ô‚µ‚ÌuüŠúv‚ğİ’è */
+}
+  
+  h1 {
+    color: #02627a;
+    font-size: 36px;
+  }
+  form {
+    font-size: 18px;
+  }
+  select {
+    font-size: 16px; 
+    padding: 10px;  
+    width: 250px;    
+    height: 40px;    
+  } 
+  
+  input[type="text"], input[type="date"] {
+    font-size: 16px;
+    width: 200px;
+    height: 30px;
+  } 
+  
+  button {
+    background-color: #9ad3de; 
+    color: #02627a; /* ƒeƒLƒXƒgF */
+    border: none;
+    border-radius: 12px; 
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  #loading {
+    font-size: 24px;
+  }
+  
+  .active-tab {
+    background-color: #02627a; 
+    color: white; 
+  }
+  .tab-content {
+    margin-right: 500px;
+    border-radius: 10px; /* Šp‚ğŠÛ‚­‚·‚é */
+    border: 2px solid #ccc; /* ˜gü‚ğ’Ç‰Á */
+    background-color: #b5facc; /* ”wŒiF‚ğİ’è */
+    padding: 15px; /* “à•”‚Ì—]”’‚ğİ’è */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* ƒIƒvƒVƒ‡ƒ“: ‰e‚ğ’Ç‰Á */
+  }
+  

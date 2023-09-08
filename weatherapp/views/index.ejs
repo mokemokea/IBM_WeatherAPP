@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather App</title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <script src="/javascripts/main.js"></script>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <form id="geocodeForm">
+    <select id="locationSelect" name="geocode"></select>
+    <span id="geocodeDisplay"></span>
+    <br>
+    Add new location: 
+    <label for="newGeocodeName">Name: </label><input type="text" id="newGeocodeName">
+    <label for="newGeocode">Geocode: </label><input type="text" id="newGeocode">
+    <button type="button" id="addGeocode">Add</button>
+    <br>
+    Start DateTime: <input type="date" name="startDateTime" value="2022-01-01" min="2022-01-01" max="2022-12-31">
+    <br>
+    End DateTime: <input type="date" name="endDateTime" value="2022-01-31" min="2022-01-01" max="2022-12-31">
+    <br>
+    <button type="submit">Update</button>
+    <div id="loading" style="display:none;">読み込み中...</div>
+  </form>
+  <div class="tab-buttons">
+    <button id="tab1-button" class="active-tab">日別</button>
+    <button id="tab2-button">上中下旬</button>
+    <button id="tab3-button">月別</button>
+  </div>
+  <div class="tab-content">
+    <div id="tab1" class="tab">
+      <div id="DailyWeatherInfo">
+        <% if (processedData.DailyData) { %>
+          <h2>日別データ:</h2>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!--chart.jsを得るためのCDN-->
+          <strong>日付</strong>|天気|平均気温|平均湿度|推定客単価|推定客数|<strong>推定エリア売り上げ</strong>
+          <% for (let date in processedData.DailyData) { %>
+            <ul><strong><%= date %></strong>|
+            <%= processedData.DailyData[date].dailyWeather %>|
+            <%= Math.floor((processedData.DailyData[date].dailyAverageTemperature*100))/100 %>℃|
+            <%= Math.floor((processedData.DailyData[date].dailyAverageHumidity*100))/100 %>%|
+            <%= Math.floor((processedData.DailyData[date].Estimated_customer_spend*100))/100 %>円|
+            <%= Math.floor((processedData.DailyData[date].Estimated_number_customers*100))/100 %>人|
+            <strong>
+            <%= Math.floor((processedData.DailyData[date].Estimated_area_sales*100))/100 %>円
+            </strong>
+            </ul>
+          <% } %>
+        <% } else { %>
+          <p>No initial weather data available.</p>
+        <% } %>
+      </div>
+    </div>
+    <div id="tab2" class="tab" style="display:none;">
+      <div id="ternaryMonthlyDataWeatherInfo">
+        <% if (processedData.ternaryMonthlyData) { %>
+          <h3>上中下旬別データ:</h3>
+          <strong>日付~時期</strong>|天気比|平均気温|平均湿度
+          <% for (let month in processedData.ternaryMonthlyData) { %>
+            <% for (let season in processedData.ternaryMonthlyData[month]) { %>
+              <ul><strong><%= month %>~<%= season %></strong>|
+              <%= JSON.stringify(processedData.ternaryMonthlyData[month][season].weatherConditionCount) %>|
+              <%= Math.floor((processedData.ternaryMonthlyData[month][season].temp*100))/100 %>℃|
+              <%= Math.floor((processedData.ternaryMonthlyData[month][season].humidity*100))/100 %>%</ul>
+            <% } %>
+          <% } %>
+        <% } else { %>
+          <p>No initial weather data available.</p>
+        <% } %>
+      </div>
+    </div>
+    <div id="tab3" class="tab" style="display:none;">
+      <div id="MonthlyDataWeatherInfo">
+        <% if (processedData.monthlyData) { %>
+          <h4>月別データ:</h4>
+          <strong>日付</strong>|天気比|平均気温|平均湿度
+          <% for (let month in processedData.monthlyData) { %>
+            <ul><strong><%= month %></strong>|
+            <%= JSON.stringify(processedData.monthlyData[month].weatherConditionCount) %>|
+            <%= Math.floor((processedData.monthlyData[month].temp*100))/100 %>℃|
+            <%= Math.floor((processedData.monthlyData[month].humidity*100))/100 %>%</ul>
+          <% } %>
+        <% } else { %>
+          <p>No initial weather data available.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>  
+ 
+</body>
+</html>
